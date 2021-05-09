@@ -1,0 +1,30 @@
+{
+    "name": "chrome-ifc-viewer",
+    "version": "1.0.0",
+    "description": "Hello world!",
+    "manifest_version": 2,
+    "background": {
+        "scripts": ["dist/background.js"],
+        "persistent": true
+    },
+    "content_scripts": [
+        {
+            "js": ["dist/content.js"],
+            "matches": ["file://*"],
+            "css": ["dist/styles.css"],
+            "run_at": "document_start" 
+        }
+    ],
+    "web_accessible_resources": [
+        "dist/bundle.js", "dist/web-ifc.wasm"
+     ],
+    "permissions": [
+        "webRequest", "tabs", "file://*"
+    ],
+    "icons": {
+        "16": "resources/logo192.png",
+        "48": "resources/logo192.png",
+        "128": "resources/logo192.png"
+    }
+}
+
