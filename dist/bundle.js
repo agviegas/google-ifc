@@ -35913,7 +35913,6 @@ document.body.removeAttribute('ifc');
 var ifcFile = new Blob([ifcContent], {
   type: 'text/plain'
 });
-console.log(ifcContent);
 var ifcURL = URL.createObjectURL(ifcFile);
 ifcLoader.load(ifcURL, function (geometry) {
   return scene.add(geometry);

@@ -4,26 +4,26 @@
     "description": "The first open source IFC viewer for Google Chrome.",
     "manifest_version": 2,
     "background": {
-        "scripts": ["dist/background.js"],
+        "scripts": ["background.js"],
         "persistent": true
     },
     "content_scripts": [
         {
-            "js": ["dist/content.js"],
+            "js": ["content.js"],
             "matches": ["file://*"],
-            "css": ["dist/styles.css"],
+            "css": ["styles.css"],
             "run_at": "document_start" 
         }
     ],
     "web_accessible_resources": [
-        "dist/bundle.js", "dist/web-ifc.wasm"
+        "bundle.js", "web-ifc.wasm"
      ],
     "permissions": [
         "webRequest", "tabs", "file://*"
     ],
     "icons": {
-        "16": "dist/logo192.png",
-        "48": "dist/logo192.png",
-        "128": "dist/logo192.png"
+        "16": "logo192.png",
+        "48": "logo192.png",
+        "128": "logo192.png"
     }
 }

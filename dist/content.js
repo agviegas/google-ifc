@@ -1,19 +1,30 @@
 console.log("Script ready!");
+let ifc = "";
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  sendResponse("Event received!");
-  console.log(request);
-  if (document.body.firstChild) document.body.firstChild.remove();
-  storeWasmUrl();
-  document.body.setAttribute("ifc", request.ifc);
-  createThreeScene();
+  sendResponse("Event success!");
+  if(request.type == "chunk"){
+    ifc += request.ifcData;
+  }
+  else if(request.type == "last"){
+    if (document.body.firstChild) document.body.firstChild.remove();
+    storeWasmUrl();
+    storeIfcData(request.ifcData);
+    createThreeScene();
+  }
 });
 
 function storeWasmUrl() {
   document.body.setAttribute(
     "wasmURL",
-    chrome.runtime.getURL("dist/web-ifc.wasm")
+    chrome.runtime.getURL("web-ifc.wasm")
   );
+}
+
+function storeIfcData(ifcData){
+  ifc += ifcData;
+  document.body.setAttribute("ifc", ifc);
+  ifc = "";
 }
 
 function createThreeScene() {
@@ -34,7 +45,7 @@ function getHead() {
 function addThreeScript() {
   const script = document.createElement("script");
   script.setAttribute("type", "module");
-  script.setAttribute("src", chrome.extension.getURL("dist/bundle.js"));
+  script.setAttribute("src", chrome.extension.getURL("bundle.js"));
   const head = getHead();
   head.insertBefore(script, head.lastChild);
 }

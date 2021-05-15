@@ -89,6 +89,5 @@ ifcLoader.setWasmPath(wasmDir);
 const ifcContent = document.body.getAttribute('ifc');
 document.body.removeAttribute('ifc');
 const ifcFile = new Blob([ifcContent], {type: 'text/plain'});
-console.log(ifcContent);
 const ifcURL = URL.createObjectURL(ifcFile);
 ifcLoader.load(ifcURL, (geometry) => scene.add(geometry));
